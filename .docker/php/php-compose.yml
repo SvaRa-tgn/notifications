@@ -1,0 +1,29 @@
+version: '3.8'
+
+x-php-build: &php-build
+  context: ../..
+  dockerfile: .docker/php/Dockerfile
+
+services:
+  php:
+    build: *php-build
+    restart: unless-stopped
+    expose:
+      - 9000
+    environment:
+      XDEBUG_CONFIG: "remote_host=${XDEBUG_HOST:-host.docker.internal} remote_port=${XDEBUG_PORT:-9100} remote_enable=1 idekey=${XDEBUG_IDEKEY:-PHPSTORM}"
+
+  cron:
+    build: *php-build
+    command: sh -c "cron && tail -f /var/log/cron.log"
+    restart: unless-stopped
+
+  composer:
+    build: *php-build
+    command: composer install
+    restart: "no"
+
+  worker:
+    build: *php-build
+    command: php artisan queue:work --tries=3
+    restart: unless-stopped

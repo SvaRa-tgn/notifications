@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+PM_MAX_CHILDREN=${PM_MAX_CHILDREN:-5}
+PM_START_SERVERS=${PM_START_SERVERS:-2}
+PM_MIN_SPARE_SERVERS=${PM_MIN_SPARE_SERVERS:-1}
+PM_MAX_SPARE_SERVERS=${PM_MAX_SPARE_SERVERS:-3}
+
+sed -i "s/^pm\.max_children.*/pm\.max_children = $PM_MAX_CHILDREN/" /usr/local/etc/php-fpm.d/www.conf
+sed -i "s/^pm\.start_servers.*/pm\.start_servers = $PM_START_SERVERS/" /usr/local/etc/php-fpm.d/www.conf
+sed -i "s/^pm\.min_spare_servers.*/pm\.min_spare_servers = $PM_MIN_SPARE_SERVERS/" /usr/local/etc/php-fpm.d/www.conf
+sed -i "s/^pm\.max_spare_servers.*/pm\.max_spare_servers = $PM_MAX_SPARE_SERVERS/" /usr/local/etc/php-fpm.d/www.conf
+
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+	set -- php-fpm "$@"
+fi
+
+exec "$@"

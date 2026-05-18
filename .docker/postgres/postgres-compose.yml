@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  test:
+    image: postgres:17-alpine
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+  postgres_test_data:
+
