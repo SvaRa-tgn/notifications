@@ -20,3 +20,5 @@ php artisan kafka:consume --topic=notifications-info
 php artisan kafka:consume --topic=notifications-marketing
 
 Коллекция для Postman лежит в проекте Notification.json
+
+Тесты!!! Запускаем в контейнере - php artisan test
