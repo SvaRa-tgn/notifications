@@ -1,0 +1,69 @@
+{
+  "info": {
+    "name": "Notification",
+    "description": null,
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Отправка сообщений",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "localhost/api/notifications/send",
+          "protocol": "",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "notifications",
+            "send"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"channel\": \"email\",\n  \"message\": \"test\",\n  \"priority\": \"transactional\",\n  \"recipients\": [\"sdsdsd\"]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Получение всех сообщений подписчика",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "localhost/api/notifications/sdsdsd",
+          "protocol": "",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "notifications",
+            "sdsdsd"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    }
+  ],
+  "variable": []
+}
